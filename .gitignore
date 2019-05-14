@@ -334,3 +334,4 @@ ASALocalRun/
 *.tfstate.backup
 .terraform
 .terraform\*
+*.tfstate.lock.info

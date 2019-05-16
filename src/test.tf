@@ -18,9 +18,10 @@ module "label" {
 }
 
 module "test" {
-  source = "./modules/patterns/sqs_with_dlq"
-  name   = "${module.label.id}"
-  tags   = "${module.label.tags}"
+  source                  = "./modules/patterns/logging_to_kinesis"
+  name                    = "${module.label.id}"
+  destination_bucket_name = "cct-logs-experimental"
+  tags                    = "${module.label.tags}"
 
   providers = {
     aws = "aws"
@@ -28,5 +29,5 @@ module "test" {
 }
 
 output out1 {
-  value = "${module.test.arn}"
+  value = "${module.test.write_policy_arn}"
 }

@@ -2,9 +2,10 @@ module "dlq" {
   source                     = "../../resources/sqs/plain"
   name                       = "${var.name}-ERROR"
   visibility_timeout_seconds = "${var.visibility_timeout_seconds}"
-  message_retention_seconds  = 1209600
-  max_message_size           = 262144
   tags                       = "${var.tags}"
+
+  message_retention_seconds = 1209600 # Max
+  max_message_size          = 262144  # Max
 }
 
 module "queue" {

@@ -9,9 +9,11 @@ resource "aws_lambda_function" "app" {
   memory_size   = "${var.memory_size}"
   timeout       = "${var.timeout}"
 
+  reserved_concurrent_executions = "${var.max_concurrent_executions}"
+
   environment {
     variables = "${var.variables}"
   }
 
-  tags  = "${var.tags}"
+  tags = "${var.tags}"
 }

@@ -4,7 +4,8 @@ variable "application" {
 }
 
 variable "name" {
-  description = "Component name, e.g. `app`"
+  default     = ""
+  description = "Component (or resource) name, e.g. `app`. Not used in tags as it could re-write standard AWS tag."
 }
 
 variable "environment" {
@@ -17,7 +18,7 @@ variable "attributes" {
   description = "Additional attributes, e.g. `1`"
 }
 
-variable "service" {
+variable "domain" {
   description = "The group name of one or multiple applications"
 }
 

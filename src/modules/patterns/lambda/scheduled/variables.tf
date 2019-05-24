@@ -2,10 +2,6 @@ variable "name" {
   description = "Lambda name"
 }
 
-variable "role_arn" {
-  description = "Role ARN"
-}
-
 variable "handler" {
   description = "The function entrypoint in your code."
 }
@@ -47,14 +43,19 @@ variable "variables" {
   }
 }
 
-variable "logs_arn" {
-  default     = ""
-  description = "Do not use this variable. It just for proper graph dependency."
+variable "log_retention_days" {
+  type        = "string"
+  description = "Cloudwatch logs retention"
+  default     = "30"
 }
 
 variable "max_concurrent_executions" {
   default     = -1
   description = "The amount of reserved concurrent executions for this lambda function. A value of 0 disables lambda from being triggered and -1 removes any concurrency limitations."
+}
+
+variable "schedule_expression" {
+  description = "The scheduling expression. For example, cron(0 20 * * ? *) or rate(5 minutes)."
 }
 
 variable "tags" {

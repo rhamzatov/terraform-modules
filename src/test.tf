@@ -12,16 +12,27 @@ module "label" {
   name        = "spa"
   environment = "test"
   attributes  = ["experimental"]
-  service     = "Customer Care"
+  domain      = "ci-cd platform"
   cost_center = "3600"
   team        = "customer care technology"
 }
 
 module "test" {
-  source        = "./modules/patterns/sns_to_sqs_with_dlq"
-  name          = "${module.label.id}"
-  delay_seconds = 60
-  tags          = "${module.label.tags}"
+  source              = "./modules/patterns/lambda/scheduled"
+  name                = "${module.label.id_without_env}"
+  handler             = "Connectors.Zendesk.Customer::Connectors.Zendesk.Customer.Function::FunctionHandler"
+  s3_bucket_name      = "cct-artifacts-t"
+  memory_size         = 512
+  timeout             = 59
+  log_retention_days  = 14
+  schedule_expression = "rate(1 minutes)"
+
+  variables = {
+    env1 = "var1"
+    env2 = "var2"
+  }
+
+  tags = "${module.label.tags}"
 
   providers = {
     aws = "aws"
@@ -29,13 +40,13 @@ module "test" {
 }
 
 output out1 {
-  value = "${module.test.sns_arn}"
+  value = "${module.test.lambda_arn}"
 }
 
 output out2 {
-  value = "${module.test.sqs_arn}"
+  value = "${module.test.role_arn}"
 }
 
 output out3 {
-  value = "${module.test.dlq_arn}"
+  value = "${module.test.role_name}"
 }

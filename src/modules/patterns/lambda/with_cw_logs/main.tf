@@ -18,7 +18,9 @@ resource "aws_iam_role" "app" {
 EOF
 }
 
-resource "aws_cloudwatch_log_group" "app" {
+module "log_group" {
+  source = "../../../resources/cw/log_group"
+
   name              = "/aws/lambda/${var.name}"
   retention_in_days = "${var.log_retention_days}"
   tags              = "${var.tags}"
@@ -37,7 +39,7 @@ resource "aws_iam_policy" "lambda_logging" {
         "logs:CreateLogStream",
         "logs:PutLogEvents"
       ],
-      "Resource": "${aws_cloudwatch_log_group.app.arn}",
+      "Resource": "${module.log_group.arn}",
       "Effect": "Allow"
     }
   ]
@@ -63,7 +65,7 @@ module "lambda" {
   memory_size    = "${var.memory_size}"
   timeout        = "${var.timeout}"
   variables      = "${var.variables}"
-  logs_arn       = "${aws_cloudwatch_log_group.app.arn}"
+  logs_arn       = "${module.log_group.arn}"
 
   max_concurrent_executions = "${var.max_concurrent_executions}"
 

@@ -13,3 +13,7 @@ output "role_arn" {
 output "role_name" {
   value = "${aws_iam_role.app.name}"
 }
+
+output "log_group_name" {
+  value = "${module.log_group.name}"
+}

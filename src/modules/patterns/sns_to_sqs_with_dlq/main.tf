@@ -22,29 +22,3 @@ resource "aws_sns_topic_subscription" "topic_subscription" {
   protocol  = "sqs"
   endpoint  = "${module.queue.arn}"
 }
-
-data "aws_iam_policy_document" "send_policy" {
-  statement {
-    principals = [
-      {
-        type        = "AWS"
-        identifiers = ["*"]
-      },
-    ]
-
-    actions = [
-      "sqs:GetQueueUrl",
-      "sqs:ReceiveMessage",
-      "sqs:ChangeMessageVisibility",
-      "sqs:DeleteMessage",
-      "sqs:SendMessage",
-    ]
-
-    resources = ["${module.queue.arn}"]
-  }
-}
-
-resource "aws_sqs_queue_policy" "send_policy" {
-  queue_url = "${module.queue.url}"
-  policy    = "${data.aws_iam_policy_document.send_policy.json}"
-}

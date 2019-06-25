@@ -20,3 +20,29 @@ module "queue" {
   policy                     = "${var.policy}"
   tags                       = "${var.tags}"
 }
+
+data "aws_iam_policy_document" "queue_policy" {
+  statement {
+    principals = [
+      {
+        type        = "AWS"
+        identifiers = ["*"]
+      },
+    ]
+
+    actions = [
+      "sqs:GetQueueUrl",
+      "sqs:ReceiveMessage",
+      "sqs:ChangeMessageVisibility",
+      "sqs:DeleteMessage",
+      "sqs:SendMessage",
+    ]
+
+    resources = ["${module.queue.arn}"]
+  }
+}
+
+resource "aws_sqs_queue_policy" "queue_policy" {
+  queue_url = "${module.queue.id}"
+  policy    = "${data.aws_iam_policy_document.queue_policy.json}"
+}

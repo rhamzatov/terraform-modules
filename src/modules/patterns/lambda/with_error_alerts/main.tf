@@ -1,7 +1,8 @@
 module "lambda" {
   source         = "../with_cw_logs"
-  name           = "${var.app_name}"
+  name           = "${var.name}"
   description    = "${var.description}"
+  filepath       = "${var.filepath}"
   s3_bucket_name = "${var.s3_bucket_name}"
   s3_bucket_path = "${var.s3_bucket_path}"
   handler        = "${var.handler}"
@@ -19,7 +20,7 @@ module "lambda" {
 
 module "error_topic" {
   source = "../../../resources/sns/plain"
-  name   = "${var.app_name}-LogErrors"
+  name   = "${var.name}-LogErrors"
   tags   = "${var.tags}"
 }
 
@@ -31,20 +32,20 @@ module "email_subscriptions" {
 
 module "metric_filter" {
   source         = "../../../resources/cw/metric_filter"
-  name           = "${var.app_name}-ErrorFilter"
+  name           = "${var.name}-ErrorFilter"
   pattern        = "${var.pattern}"
   log_group_name = "${module.lambda.log_group_name}"
 }
 
 module "metric_alarm" {
   source              = "../../../resources/cw/statistic_metric_alarm"
-  alarm_name          = "${var.app_name}-ErrorAlarm"
+  alarm_name          = "${var.name}-ErrorAlarm"
   comparison_operator = "${var.comparison_operator}"
   evaluation_periods  = "${var.evaluation_periods}"
   metric_name         = "${module.metric_filter.name}"
-  period              = "${var.period}"
+  period              = "${var.alert_period}"
   statistic           = "${var.statistic}"
   threshold           = "${var.threshold}"
-  alarm_description   = "This metric alerts on ${var.app_name} errors"
+  alarm_description   = "This metric alerts on ${var.name} errors"
   alarm_actions       = ["${module.error_topic.arn}"]
 }

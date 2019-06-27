@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 locals {
-  app_name = "test_lambda_with_error_alerts"
+  app_name = "test-lambda-with-error-alerts"
   bucket   = "cct-bo-temp-t"
 }
 
@@ -20,23 +20,24 @@ module "label" {
 data "archive_file" "zip" {
   type        = "zip"
   source_file = "${path.module}/index.js"
-  output_path = "${path.module}/publish/index.zip"
+  output_path = "${path.cwd}/publish/index.zip"
 }
 
 resource "aws_s3_bucket_object" "bucket" {
   key    = "${local.app_name}"
   bucket = "${local.bucket}"
-  source = "${path.module}/publish/index.zip"
+  source = "${path.cwd}/publish/index.zip"
 }
 
 module "test" {
   source         = "../../modules/patterns/lambda/with_error_alerts"
-  app_name       = "${local.app_name}"
+  name           = "${local.app_name}"
   emails         = ["salavat.galiamov@albelli.com"]
   tags           = "${module.label.tags}"
   s3_bucket_name = "${local.bucket}"
   s3_bucket_path = "${aws_s3_bucket_object.bucket.id}"
+  filepath       = ""
   handler        = "index.handler"
   runtime        = "nodejs10.x"
-  period         = 60
+  alert_period   = 60
 }

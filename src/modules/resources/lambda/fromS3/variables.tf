@@ -61,3 +61,7 @@ variable "tags" {
   type    = "map"
   default = {}
 }
+
+variable "count" {
+  default = 1
+}

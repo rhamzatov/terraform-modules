@@ -80,7 +80,7 @@ variable "evaluation_periods" {
 }
 
 variable "statistic" {
-  default     = "SampleCount"
+  default     = "Sum"
   description = "(Optional) The statistic to apply to the alarm's associated metric. Either of the following is supported: SampleCount, Average, Sum, Minimum, Maximum."
 }
 

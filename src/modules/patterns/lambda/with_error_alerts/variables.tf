@@ -27,8 +27,9 @@ variable "s3_bucket_path" {
 }
 
 variable "emails" {
+  default     = []
   type        = "list"
-  description = "(Required) Emails for notification in case of errors"
+  description = "(Optional) Emails for notification in case of errors"
 }
 
 variable "runtime" {

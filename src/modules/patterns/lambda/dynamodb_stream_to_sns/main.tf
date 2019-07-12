@@ -4,7 +4,7 @@ locals {
 
 module "dlq" {
   source                    = "../../../resources/sqs/plain"
-  name                      = "${var.name}-ERROR"
+  name                      = "${var.name}-${var.dlq_suffix}"
   message_retention_seconds = 1209600                        # Max
   max_message_size          = 262144                         # Max
   tags                      = "${var.tags}"

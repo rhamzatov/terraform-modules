@@ -17,12 +17,13 @@ variable "subject" {
 
 variable "tags" {
   type        = "map"
-  description = "A mapping of tags to assign to the resource."
+  description = "(Required) A mapping of tags to assign to the resource."
 }
 
 variable "emails" {
+  default     = []
   type        = "list"
-  description = "(Required) Emails for notification in case of errors"
+  description = "(Optional) Emails for notification in case of errors"
 }
 
 variable "batch_size" {
@@ -38,4 +39,9 @@ variable "description" {
 variable "alert_period" {
   default     = "3600"
   description = "(Optional) The period in seconds over which the specified statistic is applied."
+}
+
+variable "dlq_suffix" {
+  default     = "ERROR"
+  description = "(Optional) DLQ name has structure: {name}_{dlq_suffix}"
 }

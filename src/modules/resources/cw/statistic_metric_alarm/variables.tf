@@ -47,3 +47,8 @@ variable "alarm_description" {
   default     = ""
   description = "(Optional) The description for the alarm."
 }
+
+variable "tags" {
+  type        = "map"
+  description = "A mapping of tags to assign to the resource."
+}

@@ -48,4 +48,5 @@ module "metric_alarm" {
   threshold           = "${var.threshold}"
   alarm_description   = "This metric alerts on ${var.name} errors"
   alarm_actions       = ["${module.error_topic.arn}"]
+  tags                = "${var.tags}"
 }

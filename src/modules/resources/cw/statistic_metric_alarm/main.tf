@@ -10,4 +10,5 @@ resource "aws_cloudwatch_metric_alarm" "app" {
   threshold           = "${var.threshold}"
   alarm_description   = "${var.alarm_description}"
   alarm_actions       = ["${var.alarm_actions}"]
+  tags                = "${var.tags}"
 }

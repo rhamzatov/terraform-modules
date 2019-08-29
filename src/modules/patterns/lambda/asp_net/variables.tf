@@ -55,5 +55,4 @@ variable "domain_certificate" {}
 
 variable "tags" {
   type    = "map"
-  default = {}
 }

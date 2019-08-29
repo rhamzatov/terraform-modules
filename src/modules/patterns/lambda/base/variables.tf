@@ -65,5 +65,4 @@ variable "max_concurrent_executions" {
 
 variable "tags" {
   type    = "map"
-  default = {}
 }

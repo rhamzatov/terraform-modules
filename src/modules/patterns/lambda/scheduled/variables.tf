@@ -60,5 +60,4 @@ variable "schedule_expression" {
 
 variable "tags" {
   type    = "map"
-  default = {}
 }

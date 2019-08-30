@@ -20,10 +20,12 @@ module "lambda" {
 module "api" {
   source = "../../api_gateway/all_path"
 
-  name               = "${var.name}"
-  sub_domain         = "${var.sub_domain}"
-  domain_certificate = "${var.domain_certificate}"
-  lambda_invoke_arn  = "${module.lambda.lambda_invoke_arn}"
+  name              = "${var.name}"
+  zone_id           = "${var.zone_id}"
+  domain            = "${var.domain}"
+  lambda_invoke_arn = "${module.lambda.lambda_invoke_arn}"
+
+  tags = "${var.tags}"
 }
 
 resource "aws_lambda_permission" "app" {

@@ -49,9 +49,9 @@ variable "log_retention_days" {
   default     = "30"
 }
 
-variable "sub_domain" {}
+variable "domain" {}
 
-variable "domain_certificate" {}
+variable "zone_id" {}
 
 variable "tags" {
   type    = "map"

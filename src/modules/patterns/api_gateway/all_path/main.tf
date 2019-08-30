@@ -3,14 +3,15 @@ provider "aws" {
   region = "us-east-1"
 }
 
-data "aws_acm_certificate" "app" {
-  provider = "aws.us-east-1"
-  domain   = "*.${var.domain_certificate}"
-  statuses = ["ISSUED"]
-}
+module "certificate" {
+  source      = "../../acm_certificate/with_validation"
+  zone_id     = "${var.zone_id}"
+  domain_name = "${var.domain}"
+  tags        = "${var.tags}"
 
-data "aws_route53_zone" "app" {
-  name = "${var.domain_certificate}."
+  providers = {
+    aws = "aws.us-east-1"
+  }
 }
 
 resource "aws_api_gateway_rest_api" "app" {
@@ -22,13 +23,13 @@ resource "aws_api_gateway_rest_api" "app" {
 }
 
 resource "aws_api_gateway_domain_name" "app" {
-  domain_name = "${var.sub_domain}.${var.domain_certificate}"
+  domain_name = "${var.domain}"
 
-  certificate_arn = "${data.aws_acm_certificate.app.arn}"
+  certificate_arn = "${module.certificate.arn}"
 }
 
 resource "aws_route53_record" "custom_domain_dns_record" {
-  zone_id = "${data.aws_route53_zone.app.zone_id}"
+  zone_id = "${var.zone_id}"
   name    = "${aws_api_gateway_domain_name.app.domain_name}"
   type    = "A"
 

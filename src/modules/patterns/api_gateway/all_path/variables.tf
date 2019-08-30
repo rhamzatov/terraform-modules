@@ -6,8 +6,12 @@ variable "stage_name" {
   default = "Default"
 }
 
-variable "sub_domain" {}
+variable "domain" {}
 
-variable "domain_certificate" {}
+variable "zone_id" {}
 
 variable "lambda_invoke_arn" {}
+
+variable "tags" {
+  type    = "map"
+}

@@ -42,6 +42,11 @@ variable "description" {
   description = "(Optional) Lambda description"
 }
 
+variable "max_concurrent_executions" {
+  default     = -1
+  description = "The amount of reserved concurrent executions for this lambda function. A value of 0 disables lambda from being triggered and -1 removes any concurrency limitations."
+}
+
 variable "memory_size" {
   default     = "512"
   description = "(Optional) Amount of memory in MB your Lambda Function can use at runtime."

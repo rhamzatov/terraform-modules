@@ -45,3 +45,8 @@ variable "dlq_suffix" {
   default     = "ERROR"
   description = "(Optional) DLQ name has structure: {name}_{dlq_suffix}"
 }
+
+variable "max_concurrent_executions" {
+  default     = -1
+  description = "The amount of reserved concurrent executions for this lambda function. A value of 0 disables lambda from being triggered and -1 removes any concurrency limitations."
+}

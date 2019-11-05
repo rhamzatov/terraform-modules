@@ -44,16 +44,17 @@ resource "aws_iam_role_policy_attachment" "dynamodb_policy_attachment" {
 }
 
 module "app" {
-  source       = "../with_error_alerts"
-  name         = "${var.name}"
-  filepath     = "${local.sourceFile}"
-  handler      = "index.handler"
-  runtime      = "nodejs10.x"
-  emails       = "${var.emails}"
-  description  = "${var.description}"
-  tags         = "${var.tags}"
-  memory_size  = 512
-  alert_period = "${var.alert_period}"
+  source                    = "../with_error_alerts"
+  name                      = "${var.name}"
+  filepath                  = "${local.sourceFile}"
+  handler                   = "index.handler"
+  runtime                   = "nodejs10.x"
+  emails                    = "${var.emails}"
+  description               = "${var.description}"
+  tags                      = "${var.tags}"
+  memory_size               = 512
+  alert_period              = "${var.alert_period}"
+  max_concurrent_executions = "${var.max_concurrent_executions}"
 
   variables = {
     SUBJECT   = "${var.subject}"

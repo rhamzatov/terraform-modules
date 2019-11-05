@@ -13,7 +13,7 @@ module "lambda" {
 
   log_retention_days = "${var.log_retention_days}"
 
-  max_concurrent_executions = -1
+  max_concurrent_executions = "${var.max_concurrent_executions}"
 
   tags = "${var.tags}"
 }

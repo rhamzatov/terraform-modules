@@ -5,8 +5,8 @@ locals {
 module "dlq" {
   source                    = "../../../resources/sqs/plain"
   name                      = "${var.name}-${var.dlq_suffix}"
-  message_retention_seconds = 1209600                        # Max
-  max_message_size          = 262144                         # Max
+  message_retention_seconds = 1209600                         # Max
+  max_message_size          = 262144                          # Max
   tags                      = "${var.tags}"
 }
 
@@ -44,16 +44,17 @@ resource "aws_iam_role_policy_attachment" "dynamodb_policy_attachment" {
 }
 
 module "app" {
-  source                    = "../with_error_alerts"
-  name                      = "${var.name}"
-  filepath                  = "${local.sourceFile}"
-  handler                   = "index.handler"
-  runtime                   = "nodejs10.x"
-  emails                    = "${var.emails}"
-  description               = "${var.description}"
-  tags                      = "${var.tags}"
-  memory_size               = 512
-  alert_period              = "${var.alert_period}"
+  source       = "../with_error_alerts"
+  name         = "${var.name}"
+  filepath     = "${local.sourceFile}"
+  handler      = "index.handler"
+  runtime      = "nodejs10.x"
+  emails       = "${var.emails}"
+  description  = "${var.description}"
+  tags         = "${var.tags}"
+  memory_size  = 512
+  alert_period = "${var.alert_period}"
+
   max_concurrent_executions = "${var.max_concurrent_executions}"
 
   variables = {

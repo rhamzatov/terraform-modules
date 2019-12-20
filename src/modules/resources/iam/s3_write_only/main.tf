@@ -4,7 +4,7 @@ data "aws_iam_policy_document" "app" {
       "s3:*"
     ]
 
-    resources = ["${var.s3_bucket_arn}"]
+    resources = ["${var.s3_bucket_arn}/*"]
   }
 }
 

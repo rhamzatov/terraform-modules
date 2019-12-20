@@ -1,9 +1,7 @@
 data "aws_iam_policy_document" "app" {
   statement {
     actions = [
-      "s3:GetObject",
-      "s3:PutObject",
-      "s3:ListBucket"
+      "s3:PutObject"
     ]
 
     resources = ["${var.s3_bucket_arn}"]

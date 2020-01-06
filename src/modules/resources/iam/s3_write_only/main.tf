@@ -10,6 +10,6 @@ data "aws_iam_policy_document" "app" {
 
 resource "aws_iam_policy" "app" {
   name        = "${var.policy_name}"
-  description = "Grant read and write access to specific S3 bucket"
+  description = "Grant write access to specific S3 bucket"
   policy      = "${data.aws_iam_policy_document.app.json}"
 }

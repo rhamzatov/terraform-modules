@@ -14,7 +14,10 @@ data "aws_iam_policy_document" "app" {
       "dynamodb:DescribeTimeToLive",
     ]
 
-    resources = ["${var.dynamo_table_arn}/*"]
+    resources = [
+      "${var.dynamo_table_arn}",
+      "${var.dynamo_table_arn}/index/*"
+    ]
   }
 }
 

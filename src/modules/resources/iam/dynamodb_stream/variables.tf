@@ -1,3 +1,6 @@
-variable "policy_name" {}
+variable "policy_name" {
+}
 
-variable "stream_arn" {}
+variable "stream_arn" {
+}
+

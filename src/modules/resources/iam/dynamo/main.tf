@@ -15,14 +15,15 @@ data "aws_iam_policy_document" "app" {
     ]
 
     resources = [
-      "${var.dynamo_table_arn}",
-      "${var.dynamo_table_arn}/index/*"
+      var.dynamo_table_arn,
+      "${var.dynamo_table_arn}/index/*",
     ]
   }
 }
 
 resource "aws_iam_policy" "app" {
-  name        = "${var.policy_name}"
+  name        = var.policy_name
   description = "Grant read and write access to specific DynamoDB table"
-  policy      = "${data.aws_iam_policy_document.app.json}"
+  policy      = data.aws_iam_policy_document.app.json
 }
+

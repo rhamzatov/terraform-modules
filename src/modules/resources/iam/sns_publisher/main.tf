@@ -4,12 +4,13 @@ data "aws_iam_policy_document" "app" {
       "sns:Publish",
     ]
 
-    resources = ["${var.topics_arn}"]
+    resources = var.topics_arn
   }
 }
 
 resource "aws_iam_policy" "app" {
-  name        = "${var.policy_name}"
+  name        = var.policy_name
   description = "Allows publish messages to specific topic(s)"
-  policy      = "${data.aws_iam_policy_document.app.json}"
+  policy      = data.aws_iam_policy_document.app.json
 }
+

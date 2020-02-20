@@ -5,12 +5,13 @@ data "aws_iam_policy_document" "app" {
       "firehose:PutRecordBatch",
     ]
 
-    resources = ["${var.stream_arn}"]
+    resources = [var.stream_arn]
   }
 }
 
 resource "aws_iam_policy" "app" {
-  name        = "${var.policy_name}"
+  name        = var.policy_name
   description = "Allows write to Kinesis Firehose"
-  policy      = "${data.aws_iam_policy_document.app.json}"
+  policy      = data.aws_iam_policy_document.app.json
 }
+

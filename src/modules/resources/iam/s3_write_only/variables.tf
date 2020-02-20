@@ -1,3 +1,6 @@
-variable "policy_name" {}
+variable "policy_name" {
+}
 
-variable "s3_bucket_arn" {}
+variable "s3_bucket_arn" {
+}
+

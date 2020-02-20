@@ -17,7 +17,8 @@ data "aws_iam_policy_document" "app" {
 }
 
 resource "aws_iam_policy" "app" {
-  name        = "${var.policy_name}"
+  name        = var.policy_name
   description = "Grant read and write access to specific Elasticsearch domain"
-  policy      = "${data.aws_iam_policy_document.app.json}"
+  policy      = data.aws_iam_policy_document.app.json
 }
+

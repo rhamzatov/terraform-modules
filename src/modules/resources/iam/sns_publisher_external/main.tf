@@ -1,6 +1,6 @@
 data "aws_iam_policy_document" "app" {
   statement {
-    resources = ["${var.sns_arn}"]
+    resources = [var.sns_arn]
 
     actions = [
       "sns:GetTopicAttributes",
@@ -14,40 +14,41 @@ data "aws_iam_policy_document" "app" {
       "sns:Receive",
     ]
 
-    principals = [{
+    principals {
       type        = "AWS"
       identifiers = ["*"]
-    }]
+    }
 
     condition {
       test     = "StringEquals"
       variable = "AWS:SourceOwner"
 
       values = [
-        "${var.owner_account_id}",
+        var.owner_account_id,
       ]
     }
 
-    sid = "${var.owner_sid}"
+    sid = var.owner_sid
   }
 
   statement {
-    resources = ["${var.sns_arn}"]
+    resources = [var.sns_arn]
 
     actions = [
       "sns:Publish",
     ]
 
-    principals = [{
+    principals {
       type        = "AWS"
       identifiers = ["arn:aws:iam::${var.publisher_account_id}:root"]
-    }]
+    }
 
-    sid = "${var.publisher_sid}"
+    sid = var.publisher_sid
   }
 }
 
 resource "aws_sns_topic_policy" "app" {
-  arn    = "${var.sns_arn}"
-  policy = "${data.aws_iam_policy_document.app.json}"
+  arn    = var.sns_arn
+  policy = data.aws_iam_policy_document.app.json
 }
+

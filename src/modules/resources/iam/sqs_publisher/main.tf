@@ -10,12 +10,13 @@ data "aws_iam_policy_document" "app" {
       "sqs:SetQueueAttributes",
     ]
 
-    resources = ["${var.queues_arn}"]
+    resources = var.queues_arn
   }
 }
 
 resource "aws_iam_policy" "app" {
-  name        = "${var.policy_name}"
+  name        = var.policy_name
   description = "Allows write messages to specific queue(s)"
-  policy      = "${data.aws_iam_policy_document.app.json}"
+  policy      = data.aws_iam_policy_document.app.json
 }
+

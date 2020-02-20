@@ -1,3 +1,6 @@
-variable "policy_name" {}
+variable "policy_name" {
+}
 
-variable "dynamo_table_arn" {}
+variable "dynamo_table_arn" {
+}
+

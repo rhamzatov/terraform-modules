@@ -1,5 +1,5 @@
 resource "aws_iam_policy" "app" {
-  name        = "${var.policy_name}"
+  name        = var.policy_name
   description = "Grant access for streaming events from DynamoDB table to a lambda."
 
   policy = <<EOF
@@ -25,4 +25,6 @@ resource "aws_iam_policy" "app" {
     ]
 }
 EOF
+
 }
+

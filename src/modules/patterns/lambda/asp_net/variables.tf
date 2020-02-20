@@ -36,7 +36,7 @@ variable "timeout" {
 }
 
 variable "variables" {
-  type = "map"
+  type = map(string)
 
   default = {
     ENCODING = "utf-8"
@@ -44,15 +44,18 @@ variable "variables" {
 }
 
 variable "log_retention_days" {
-  type        = "string"
+  type        = string
   description = "Cloudwatch logs retention"
   default     = "30"
 }
 
-variable "domain" {}
+variable "domain" {
+}
 
-variable "zone_id" {}
+variable "zone_id" {
+}
 
 variable "tags" {
-  type    = "map"
+  type = map(string)
 }
+

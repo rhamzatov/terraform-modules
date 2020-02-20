@@ -43,6 +43,12 @@ resource "aws_iam_role_policy_attachment" "dynamodb_policy_attachment" {
   policy_arn = "${module.stream_policy.arn}"
 }
 
+data "archive_file" "zip" {
+  type        = "zip"
+  source_file = "${local.sourceFile}"
+  output_path = "${path.cwd}/publish/package.zip"
+}
+
 module "app" {
   source       = "../with_error_alerts"
   name         = "${var.name}"

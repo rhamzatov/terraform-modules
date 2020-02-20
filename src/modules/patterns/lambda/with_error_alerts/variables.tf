@@ -38,7 +38,7 @@ variable "runtime" {
 }
 
 variable "description" {
-  default     = ""
+  default     = null
   description = "(Optional) Lambda description"
 }
 

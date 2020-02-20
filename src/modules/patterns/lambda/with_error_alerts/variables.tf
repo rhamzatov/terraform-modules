@@ -3,7 +3,7 @@ variable "name" {
 }
 
 variable "tags" {
-  type        = "map"
+  type        = map(string)
   description = "A mapping of tags to assign to the resource."
 }
 
@@ -28,7 +28,7 @@ variable "s3_bucket_path" {
 
 variable "emails" {
   default     = []
-  type        = "list"
+  type        = list(string)
   description = "(Optional) Emails for notification in case of errors"
 }
 
@@ -53,7 +53,7 @@ variable "timeout" {
 }
 
 variable "variables" {
-  type = "map"
+  type = map(string)
 
   default = {
     ENCODING = "utf-8"
@@ -99,3 +99,4 @@ variable "max_concurrent_executions" {
   default     = "-1"
   description = "(Optional) The amount of reserved concurrent executions for this lambda function. A value of 0 disables lambda from being triggered and -1 removes any concurrency limitations."
 }
+

@@ -16,16 +16,16 @@ module "label" {
   team        = "customer care technology"
 }
 
-module log_group {
+module "log_group" {
   source = "../../modules/resources/cw/log_group"
-  name   = "${local.log_name}"
-  tags   = "${module.label.tags}"
+  name   = local.log_name
+  tags   = module.label.tags
 }
 
-module filter {
+module "filter" {
   source         = "../../modules/resources/cw/metric_filter"
   name           = "${local.log_name}-filter"
-  log_group_name = "${module.log_group.name}"
+  log_group_name = module.log_group.name
   pattern        = "test pattern"
 }
 
@@ -38,3 +38,4 @@ module "alarm" {
   threshold           = "1"
   alarm_actions       = []
 }
+

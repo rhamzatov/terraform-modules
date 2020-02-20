@@ -46,12 +46,13 @@ variable "timeout" {
 }
 
 variable "variables" {
-  type = "map"
-  default     = null
+  type = map(string)
 
-  # default = {
-  #   ENCODING = "utf-8"
-  # }
+  # default     = null
+
+  default = {
+    ENCODING = "utf-8"
+  }
 }
 
 variable "logs_arn" {
@@ -65,5 +66,6 @@ variable "max_concurrent_executions" {
 }
 
 variable "tags" {
-  type    = "map"
+  type = map(string)
 }
+

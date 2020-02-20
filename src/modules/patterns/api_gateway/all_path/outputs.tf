@@ -1,5 +1,5 @@
 output "base_generated_url" {
-  value = "${aws_api_gateway_deployment.app.invoke_url}"
+  value = aws_api_gateway_deployment.app.invoke_url
 }
 
 output "base_url" {
@@ -7,5 +7,6 @@ output "base_url" {
 }
 
 output "execution_arn" {
-  value = "${aws_api_gateway_rest_api.app.execution_arn}"
+  value = aws_api_gateway_rest_api.app.execution_arn
 }
+

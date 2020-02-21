@@ -1,6 +1,8 @@
-variable "name" {}
+variable "name" {
+}
 
-variable "destination_bucket_name" {}
+variable "destination_bucket_name" {
+}
 
 variable "buffer_interval_in_seconds" {
   default = 60
@@ -23,5 +25,6 @@ variable "sumo_notification_endpoint" {
 }
 
 variable "tags" {
-  type = "map"
+  type = map(string)
 }
+

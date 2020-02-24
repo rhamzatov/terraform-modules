@@ -36,7 +36,7 @@ variable "timeout" {
 }
 
 variable "variables" {
-  type = "map"
+  type = map(string)
 
   default = {
     ENCODING = "utf-8"
@@ -44,7 +44,7 @@ variable "variables" {
 }
 
 variable "log_retention_days" {
-  type        = "string"
+  type        = string
   description = "Cloudwatch logs retention"
   default     = "30"
 }
@@ -59,5 +59,6 @@ variable "schedule_expression" {
 }
 
 variable "tags" {
-  type    = "map"
+  type = map(string)
 }
+

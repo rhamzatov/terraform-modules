@@ -1,7 +1,10 @@
-variable "zone_id" {}
+variable "zone_id" {
+}
 
-variable "domain_name" {}
+variable "domain_name" {
+}
 
 variable "tags" {
-  type = "map"
+  type = map(string)
 }
+

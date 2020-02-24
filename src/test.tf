@@ -3,7 +3,7 @@ variable "region" {
 }
 
 provider "aws" {
-  region = "${var.region}"
+  region = var.region
 }
 
 module "label" {
@@ -19,7 +19,7 @@ module "label" {
 
 module "test" {
   source              = "./modules/patterns/lambda/scheduled"
-  name                = "${module.label.id_without_env}"
+  name                = module.label.id_without_env
   handler             = "Connectors.Zendesk.Customer::Connectors.Zendesk.Customer.Function::FunctionHandler"
   s3_bucket_name      = "cct-artifacts-t"
   memory_size         = 512
@@ -32,21 +32,22 @@ module "test" {
     env2 = "var2"
   }
 
-  tags = "${module.label.tags}"
+  tags = module.label.tags
 
   providers = {
-    aws = "aws"
+    aws = aws
   }
 }
 
-output out1 {
-  value = "${module.test.lambda_arn}"
+output "out1" {
+  value = module.test.lambda_arn
 }
 
-output out2 {
-  value = "${module.test.role_arn}"
+output "out2" {
+  value = module.test.role_arn
 }
 
-output out3 {
-  value = "${module.test.role_name}"
+output "out3" {
+  value = module.test.role_name
 }
+

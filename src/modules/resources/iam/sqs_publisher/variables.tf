@@ -1,5 +1,7 @@
-variable "policy_name" {}
+variable "policy_name" {
+}
 
 variable "queues_arn" {
-  type = "list"
+  type = list(string)
 }
+

@@ -13,7 +13,7 @@ variable "environment" {
 }
 
 variable "attributes" {
-  type        = "list"
+  type        = list(string)
   default     = []
   description = "Additional attributes, e.g. `1`"
 }
@@ -32,13 +32,14 @@ variable "team" {
 }
 
 variable "delimiter" {
-  type        = "string"
+  type        = string
   default     = "-"
   description = "Delimiter to be used between `application`, `name` and `environment`"
 }
 
 variable "tags" {
-  type        = "map"
+  type        = map(string)
   default     = {}
   description = "Additional tags"
 }
+

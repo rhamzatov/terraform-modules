@@ -1,6 +1,6 @@
 resource "aws_iam_role" "app" {
-  name        = "${var.name}"
-  description = "${var.description}"
+  name        = var.name
+  description = var.description
 
   assume_role_policy = <<EOF
 {
@@ -16,14 +16,15 @@ resource "aws_iam_role" "app" {
   ]
 }
 EOF
+
 }
 
 module "log_group" {
   source = "../../../resources/cw/log_group"
 
   name              = "/aws/lambda/${var.name}"
-  retention_in_days = "${var.log_retention_days}"
-  tags              = "${var.tags}"
+  retention_in_days = var.log_retention_days
+  tags              = var.tags
 }
 
 resource "aws_iam_policy" "lambda_logging" {
@@ -45,30 +46,32 @@ resource "aws_iam_policy" "lambda_logging" {
   ]
 }
 EOF
+
 }
 
 resource "aws_iam_role_policy_attachment" "lambda_logging" {
-  role       = "${aws_iam_role.app.name}"
-  policy_arn = "${aws_iam_policy.lambda_logging.arn}"
+  role       = aws_iam_role.app.name
+  policy_arn = aws_iam_policy.lambda_logging.arn
 }
 
 module "lambda" {
-  source = "../base"
+  source = "../../../resources/lambda/plain"
 
-  name           = "${var.name}"
-  description    = "${var.description}"
-  role_arn       = "${aws_iam_role.app.arn}"
-  filepath       = "${var.filepath}"
-  s3_bucket_name = "${var.s3_bucket_name}"
-  s3_bucket_path = "${var.s3_bucket_path}"
-  handler        = "${var.handler}"
-  runtime        = "${var.runtime}"
-  memory_size    = "${var.memory_size}"
-  timeout        = "${var.timeout}"
-  variables      = "${var.variables}"
-  logs_arn       = "${module.log_group.arn}"
+  name           = var.name
+  description    = var.description
+  role_arn       = aws_iam_role.app.arn
+  filepath       = var.filepath
+  s3_bucket_name = var.s3_bucket_name
+  s3_bucket_path = var.s3_bucket_path
+  handler        = var.handler
+  runtime        = var.runtime
+  memory_size    = var.memory_size
+  timeout        = var.timeout
+  variables      = var.variables
+  logs_arn       = module.log_group.arn
 
-  max_concurrent_executions = "${var.max_concurrent_executions}"
+  max_concurrent_executions = var.max_concurrent_executions
 
-  tags = "${var.tags}"
+  tags = var.tags
 }
+

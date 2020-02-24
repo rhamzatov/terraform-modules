@@ -1,5 +1,5 @@
 variable "input" {
-  type        = "list"
+  type        = list(string)
   description = "Input array of strings"
 }
 
@@ -9,17 +9,18 @@ variable "suffix" {
 }
 
 locals {
-  joied_values = "${formatlist("%s%s", var.input, var.suffix)}"
+  joied_values = formatlist("%s%s", var.input, var.suffix)
 }
 
 locals {
-  concatenated_array = "${concat(var.input, local.joied_values)}"
+  concatenated_array = concat(var.input, local.joied_values)
 }
 
 output "new_array" {
-  value = "${local.joied_values}"
+  value = local.joied_values
 }
 
 output "concatenated_array" {
-  value = "${local.concatenated_array}"
+  value = local.concatenated_array
 }
+

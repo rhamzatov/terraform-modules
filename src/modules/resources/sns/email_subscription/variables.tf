@@ -3,7 +3,7 @@ variable "sns_topic_arn" {
 }
 
 variable "emails" {
-  type        = "list"
+  type        = list(string)
   description = "(Required) Emails to notify."
 }
 
@@ -11,3 +11,4 @@ variable "region" {
   default     = "eu-west-1"
   description = "(Optional) The region to use."
 }
+

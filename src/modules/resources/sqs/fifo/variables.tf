@@ -1,4 +1,5 @@
-variable "name" {}
+variable "name" {
+}
 
 variable "visibility_timeout_seconds" {
   default     = 30
@@ -36,5 +37,6 @@ variable "content_based_deduplication" {
 }
 
 variable "tags" {
-  type = "map"
+  type = map(string)
 }
+

@@ -16,13 +16,13 @@ variable "subject" {
 }
 
 variable "tags" {
-  type        = "map"
+  type        = map(string)
   description = "(Required) A mapping of tags to assign to the resource."
 }
 
 variable "emails" {
   default     = []
-  type        = "list"
+  type        = list(string)
   description = "(Optional) Emails for notification in case of errors"
 }
 
@@ -50,3 +50,4 @@ variable "max_concurrent_executions" {
   default     = "-1"
   description = "(Optional) The amount of reserved concurrent executions for this lambda function. A value of 0 disables lambda from being triggered and -1 removes any concurrency limitations."
 }
+

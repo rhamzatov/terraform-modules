@@ -7,7 +7,7 @@ variable "handler" {
 }
 
 variable "filepath" {
-  default     = ""
+  default     = null
   description = "(Optional) The path to the function's deployment package within the local filesystem. If defined, The s3_-prefixed options cannot be used."
 }
 
@@ -42,7 +42,7 @@ variable "timeout" {
 }
 
 variable "variables" {
-  type = "map"
+  type = map(string)
 
   default = {
     ENCODING = "utf-8"
@@ -50,7 +50,7 @@ variable "variables" {
 }
 
 variable "log_retention_days" {
-  type        = "string"
+  type        = string
   description = "Cloudwatch logs retention"
   default     = "30"
 }
@@ -61,5 +61,6 @@ variable "max_concurrent_executions" {
 }
 
 variable "tags" {
-  type    = "map"
+  type = map(string)
 }
+

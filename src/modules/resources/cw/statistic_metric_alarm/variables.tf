@@ -19,7 +19,7 @@ variable "metric_name" {
 }
 
 variable "alarm_actions" {
-  type        = "list"
+  type        = list(string)
   description = "(Required) The list of actions to execute when this alarm transitions into an ALARM state from any other state. Each action is specified as an Amazon Resource Name (ARN)."
 }
 
@@ -49,6 +49,7 @@ variable "alarm_description" {
 }
 
 variable "tags" {
-  type        = "map"
+  type        = map(string)
   description = "A mapping of tags to assign to the resource."
 }
+

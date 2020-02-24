@@ -6,12 +6,16 @@ variable "stage_name" {
   default = "Default"
 }
 
-variable "domain" {}
+variable "domain" {
+}
 
-variable "zone_id" {}
+variable "zone_id" {
+}
 
-variable "lambda_invoke_arn" {}
+variable "lambda_invoke_arn" {
+}
 
 variable "tags" {
-  type    = "map"
+  type = map(string)
 }
+

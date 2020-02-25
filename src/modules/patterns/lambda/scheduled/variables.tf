@@ -7,11 +7,12 @@ variable "handler" {
 }
 
 variable "s3_bucket_name" {
+  default     = null
   description = "Lambda source bucket (storage)"
 }
 
 variable "s3_bucket_path" {
-  default     = ""
+  default     = null
   description = "Path to artifact (zipped lambda)"
 }
 

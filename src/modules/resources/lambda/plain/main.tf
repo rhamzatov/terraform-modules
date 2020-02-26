@@ -8,9 +8,9 @@ resource "aws_lambda_function" "app" {
 
   # s3_key        = (var.filepath == null || var.s3_bucket_path == null ? "builds/lambda/${var.name}/lambda.zip" : (var.s3_bucket_path != null ?  var.s3_bucket_path : null))
 
-  s3_key        = (var.s3_bucket_path == null ? "builds/lambda/${var.name}/lambda.zip" : (var.filepath == null ? var.s3_bucket_path : null))
+  # s3_key        = (var.s3_bucket_path == null ? "builds/lambda/${var.name}/lambda.zip" : (var.filepath == null ? var.s3_bucket_path : null))
 
-  # s3_key        = var.s3_bucket_path == null ? "builds/lambda/${var.name}/lambda.zip" : var.s3_bucket_path
+  s3_key        = var.filepath == null ? (var.s3_bucket_path == null ? "builds/lambda/${var.name}/lambda.zip" : var.s3_bucket_path) : null
   
   filename      = var.filepath
   handler       = var.handler

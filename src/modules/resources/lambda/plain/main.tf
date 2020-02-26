@@ -1,5 +1,5 @@
 locals {
-  resolve_s3_key = var.filepath == null ? local.get_bucket_path : null
+  resolve_s3_key = var.filepath == null ? local.resolve_bucket_path : null
 }
 
 locals {

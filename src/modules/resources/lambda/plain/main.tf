@@ -3,7 +3,7 @@ resource "aws_lambda_function" "app" {
   description   = var.description
   role          = var.role_arn
   s3_bucket     = var.s3_bucket_name
-  s3_key        = null
+  s3_key        = var.s3_bucket_path == null ? "builds/lambda/${var.name}/lambda.zip" : var.s3_bucket_path
   filename      = var.filepath
   handler       = var.handler
   runtime       = var.runtime

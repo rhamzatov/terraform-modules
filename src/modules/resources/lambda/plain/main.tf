@@ -1,17 +1,17 @@
+locals {
+  get_s3_key = var.filepath == null ? local.get_bucket_path : null
+}
+
+locals {
+  get_bucket_path = var.s3_bucket_path == null ? "builds/lambda/${var.name}/lambda.zip" : var.s3_bucket_path
+}
+
 resource "aws_lambda_function" "app" {
   function_name = var.name
   description   = var.description
   role          = var.role_arn
   s3_bucket     = var.s3_bucket_name
-  
-  # s3_key        = var.s3_bucket_path == null ? "builds/lambda/${var.name}/lambda.zip" : var.s3_bucket_path
-
-  # s3_key        = (var.filepath == null || var.s3_bucket_path == null ? "builds/lambda/${var.name}/lambda.zip" : (var.s3_bucket_path != null ?  var.s3_bucket_path : null))
-
-  # s3_key        = (var.s3_bucket_path == null ? "builds/lambda/${var.name}/lambda.zip" : (var.filepath == null ? var.s3_bucket_path : null))
-
-  s3_key        = var.filepath == null ? (var.s3_bucket_path == null ? "builds/lambda/${var.name}/lambda.zip" : var.s3_bucket_path) : null
-  
+  s3_key        = local.get_s3_key
   filename      = var.filepath
   handler       = var.handler
   runtime       = var.runtime

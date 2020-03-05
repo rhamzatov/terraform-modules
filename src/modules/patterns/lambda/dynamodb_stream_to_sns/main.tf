@@ -1,5 +1,5 @@
 locals {
-  sourceFile = "${path.module}/index.js"
+  sourceFile          = "${path.module}/index.js"
   adapterArtifactPath = "${path.cwd}/publish/package.zip"
 }
 
@@ -59,22 +59,33 @@ module "app" {
   emails       = var.emails
   description  = var.description
   tags         = var.tags
-  memory_size  = 512
+  memory_size  = 256
   alert_period = var.alert_period
 
   max_concurrent_executions = var.max_concurrent_executions
 
   variables = {
-    SUBJECT   = var.subject
     TOPIC_ARN = var.topic_arn
-    DLQ_URL   = module.dlq.id
   }
 }
 
 resource "aws_lambda_event_source_mapping" "app" {
-  function_name     = module.app.lambda_arn
   event_source_arn  = var.event_source_arn
-  batch_size        = var.batch_size
+  function_name     = module.app.lambda_arn
   starting_position = "TRIM_HORIZON"
+
+  maximum_record_age_in_seconds = 604800 # maximum
+
+  batch_size             = var.batch_size
+  parallelization_factor = var.parallelization_factor
+  maximum_retry_attempts = var.maximum_retry_attempts
+
+  bisect_batch_on_function_error = var.bisect_batch_on_function_error
+
+  destination_config {
+    on_failure {
+      destination_arn = module.dlq.arn
+    }
+  }
 }
 

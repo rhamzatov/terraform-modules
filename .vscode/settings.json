@@ -1,0 +1,13 @@
+{
+    "terraform.indexing": {
+        "enabled": false
+    },
+    "terraform.languageServer": {
+        "enabled": true,
+        "args": []
+    },
+    "editor.formatOnSave": true,
+    "cSpell.words": [
+        "dynamodb"
+    ]
+}

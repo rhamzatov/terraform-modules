@@ -61,6 +61,7 @@ module "app" {
   tags         = var.tags
   memory_size  = 256
   alert_period = var.alert_period
+  vpc_config   = var.vpc_config
 
   max_concurrent_executions = var.max_concurrent_executions
 

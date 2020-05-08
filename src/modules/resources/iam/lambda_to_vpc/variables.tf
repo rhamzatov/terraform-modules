@@ -1,0 +1,2 @@
+variable "policy_name" {
+}

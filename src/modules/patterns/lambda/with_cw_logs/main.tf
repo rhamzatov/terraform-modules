@@ -69,6 +69,7 @@ module "lambda" {
   timeout        = var.timeout
   variables      = var.variables
   logs_arn       = module.log_group.arn
+  vpc_config     = var.vpc_config
 
   max_concurrent_executions = var.max_concurrent_executions
 

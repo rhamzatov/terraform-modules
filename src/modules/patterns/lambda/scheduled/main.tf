@@ -9,6 +9,7 @@ module "lambda" {
   memory_size    = var.memory_size
   timeout        = var.timeout
   variables      = var.variables
+  vpc_config     = var.vpc_config
 
   log_retention_days = var.log_retention_days
 

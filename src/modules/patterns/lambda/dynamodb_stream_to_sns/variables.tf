@@ -60,3 +60,9 @@ variable "bisect_batch_on_function_error" {
   default     = false
   description = "(Optional) If the function returns an error, split the batch in two and retry. Defaults to false."
 }
+
+variable "vpc_config" {
+  description = "VPC Config for the Lambda function"
+  type        = map
+  default     = null
+}

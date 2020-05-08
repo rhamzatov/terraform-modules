@@ -100,3 +100,8 @@ variable "max_concurrent_executions" {
   description = "(Optional) The amount of reserved concurrent executions for this lambda function. A value of 0 disables lambda from being triggered and -1 removes any concurrency limitations."
 }
 
+variable "vpc_config" {
+  description = "VPC Config for the Lambda function"
+  type        = map
+  default     = null
+}

@@ -64,3 +64,8 @@ variable "tags" {
   type = map(string)
 }
 
+variable "vpc_config" {
+  description = "VPC Config for the Lambda function"
+  type        = map
+  default     = null
+}

@@ -1,3 +1,7 @@
+terraform {
+  required_version = ">= 0.12"
+}
+
 module "lambda" {
   source         = "../with_cw_logs"
   name           = var.name
@@ -13,7 +17,7 @@ module "lambda" {
 
   log_retention_days = var.log_retention_days
 
-  max_concurrent_executions = -1
+  max_concurrent_executions = var.max_concurrent_executions
 
   tags = var.tags
 }

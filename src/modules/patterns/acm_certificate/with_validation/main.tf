@@ -1,3 +1,5 @@
+provider "aws" {}
+
 resource "aws_acm_certificate" "app" {
   domain_name       = var.domain_name
   validation_method = "DNS"
@@ -24,4 +26,3 @@ resource "aws_acm_certificate_validation" "app" {
     aws_route53_record.app.fqdn,
   ]
 }
-

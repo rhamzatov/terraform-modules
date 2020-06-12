@@ -2,6 +2,12 @@ terraform {
   required_version = ">= 0.12"
 }
 
+provider "aws" {}
+
+provider "aws" {
+  alias  = "us-east-1"
+}
+
 module "lambda" {
   source         = "../with_cw_logs"
   name           = var.name
@@ -20,6 +26,10 @@ module "lambda" {
   max_concurrent_executions = var.max_concurrent_executions
 
   tags = var.tags
+
+  providers = {
+    aws = aws
+  }
 }
 
 module "api" {
@@ -31,6 +41,11 @@ module "api" {
   lambda_invoke_arn = module.lambda.lambda_invoke_arn
 
   tags = var.tags
+
+  providers = {
+    aws = aws
+    aws.us-east-1 = aws.us-east-1
+  }
 }
 
 resource "aws_lambda_permission" "app" {
@@ -45,4 +60,3 @@ resource "aws_lambda_permission" "app" {
   # within the API Gateway "REST API".
   source_arn = "${module.api.execution_arn}/*/*/*"
 }
-

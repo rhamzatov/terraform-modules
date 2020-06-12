@@ -1,6 +1,11 @@
+terraform {
+  required_version = ">= 0.12"
+}
+
+provider "aws" {}
+
 provider "aws" {
   alias  = "us-east-1"
-  region = "us-east-1"
 }
 
 module "certificate" {
@@ -95,4 +100,3 @@ resource "aws_api_gateway_base_path_mapping" "app" {
   stage_name  = aws_api_gateway_deployment.app.stage_name
   domain_name = aws_api_gateway_domain_name.app.domain_name
 }
-

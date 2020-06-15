@@ -1,12 +1,16 @@
+terraform {
+  required_version = ">= 0.12"
+}
+
 locals {
-  id = join(
+  id_with_env = join(
     var.delimiter,
     compact(
       concat([var.application, var.name, var.environment], var.attributes),
     ),
   )
 
-  id_without_env = join(
+  id = join(
     var.delimiter,
     compact(concat([var.application, var.name], var.attributes)),
   )

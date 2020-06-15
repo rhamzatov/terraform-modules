@@ -1,3 +1,7 @@
+terraform {
+  required_version = ">= 0.12"
+}
+
 resource "aws_iam_role" "app" {
   name        = var.name
   description = var.description

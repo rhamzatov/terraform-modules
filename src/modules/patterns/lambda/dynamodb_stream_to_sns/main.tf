@@ -1,3 +1,7 @@
+terraform {
+  required_version = ">= 0.12"
+}
+
 locals {
   sourceFile          = "${path.module}/index.js"
   adapterArtifactPath = "${path.cwd}/publish/package.zip"
@@ -55,7 +59,7 @@ module "app" {
   name         = var.name
   filepath     = local.adapterArtifactPath
   handler      = "index.handler"
-  runtime      = "nodejs10.x"
+  runtime      = "nodejs12.x"
   emails       = var.emails
   description  = var.description
   tags         = var.tags
@@ -89,4 +93,3 @@ resource "aws_lambda_event_source_mapping" "app" {
     }
   }
 }
-

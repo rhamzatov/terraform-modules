@@ -17,7 +17,7 @@ variable "s3_bucket_path" {
 }
 
 variable "runtime" {
-  default     = "dotnetcore2.1"
+  default     = "dotnetcore3.1"
   description = "The identifier of the function's runtime."
 }
 
@@ -47,11 +47,11 @@ variable "variables" {
 variable "log_retention_days" {
   type        = string
   description = "Cloudwatch logs retention"
-  default     = "30"
+  default     = "7"
 }
 
 variable "max_concurrent_executions" {
-  default     = -1
+  default     = 1
   description = "The amount of reserved concurrent executions for this lambda function. A value of 0 disables lambda from being triggered and -1 removes any concurrency limitations."
 }
 

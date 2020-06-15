@@ -1,3 +1,7 @@
+terraform {
+  required_version = ">= 0.12"
+}
+
 module "queue" {
   source                     = "../sqs_with_dlq"
   name                       = var.name
@@ -21,5 +25,7 @@ resource "aws_sns_topic_subscription" "topic_subscription" {
   topic_arn = module.topic.arn
   protocol  = "sqs"
   endpoint  = module.queue.arn
+  
+  raw_message_delivery = true
 }
 

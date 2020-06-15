@@ -1,3 +1,7 @@
+terraform {
+  required_version = ">= 0.12"
+}
+
 module "lambda" {
   source         = "../with_cw_logs"
   name           = var.name

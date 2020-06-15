@@ -39,4 +39,3 @@ variable "policy" {
 variable "tags" {
   type = map(string)
 }
-

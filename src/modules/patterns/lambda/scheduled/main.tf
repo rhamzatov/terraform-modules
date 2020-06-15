@@ -1,3 +1,7 @@
+terraform {
+  required_version = ">= 0.12"
+}
+
 module "lambda" {
   source         = "../with_cw_logs"
   name           = var.name
@@ -35,4 +39,3 @@ resource "aws_lambda_permission" "allow_cloudwatch_to_call_lambda" {
   principal     = "events.amazonaws.com"
   source_arn    = aws_cloudwatch_event_rule.schedule.arn
 }
-

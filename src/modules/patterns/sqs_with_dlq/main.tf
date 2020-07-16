@@ -1,6 +1,6 @@
 module "dlq" {
   source                     = "../../resources/sqs/plain"
-  name                       = "${var.name}-ERROR"
+  name                       = "${var.name}${var.dlq_suffix}"
   visibility_timeout_seconds = var.visibility_timeout_seconds
   tags                       = var.tags
 

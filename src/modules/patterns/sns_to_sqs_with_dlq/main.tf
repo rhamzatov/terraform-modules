@@ -5,6 +5,7 @@ terraform {
 module "queue" {
   source                     = "../sqs_with_dlq"
   name                       = var.name
+  dlq_suffix                 = var.dlq_suffix
   visibility_timeout_seconds = var.visibility_timeout_seconds
   message_retention_seconds  = var.message_retention_seconds
   max_message_size           = var.max_message_size

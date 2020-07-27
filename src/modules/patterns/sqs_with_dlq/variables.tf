@@ -39,3 +39,8 @@ variable "policy" {
 variable "tags" {
   type = map(string)
 }
+
+variable "dlq_suffix" {
+  default     = "-ERROR"
+  description = "The dead letter queue name suffix"
+}

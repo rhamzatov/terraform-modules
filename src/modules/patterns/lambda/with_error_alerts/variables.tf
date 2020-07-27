@@ -33,7 +33,7 @@ variable "emails" {
 }
 
 variable "runtime" {
-  default     = "dotnetcore2.1"
+  default     = "dotnetcore3.1"
   description = "(Optional) The identifier of the function's runtime."
 }
 
@@ -43,7 +43,7 @@ variable "description" {
 }
 
 variable "memory_size" {
-  default     = "512"
+  default     = "128"
   description = "(Optional) Amount of memory in MB your Lambda Function can use at runtime."
 }
 
@@ -91,7 +91,7 @@ variable "threshold" {
 }
 
 variable "log_retention_days" {
-  default     = "30"
+  default     = "7"
   description = "(Optional) Cloudwatch logs retention."
 }
 

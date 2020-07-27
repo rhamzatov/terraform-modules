@@ -1,3 +1,7 @@
+terraform {
+  required_version = ">= 0.12"
+}
+
 locals {
   resolve_s3_key = var.filepath == null ? local.resolve_bucket_path : null
 }

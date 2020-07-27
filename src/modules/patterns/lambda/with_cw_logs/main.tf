@@ -21,6 +21,7 @@ resource "aws_iam_role" "app" {
 }
 EOF
 
+  tags = var.tags
 }
 
 module "log_group" {

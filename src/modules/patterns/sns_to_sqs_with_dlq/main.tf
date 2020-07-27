@@ -27,6 +27,6 @@ resource "aws_sns_topic_subscription" "topic_subscription" {
   protocol  = "sqs"
   endpoint  = module.queue.arn
   
-  raw_message_delivery = true
+  raw_message_delivery = var.raw_message_delivery
 }
 

@@ -45,7 +45,7 @@ resource "aws_iam_policy" "lambda_logging" {
         "logs:CreateLogStream",
         "logs:PutLogEvents"
       ],
-      "Resource": "${module.log_group.arn}",
+      "Resource": "${module.log_group.arn}:*",
       "Effect": "Allow"
     }
   ]

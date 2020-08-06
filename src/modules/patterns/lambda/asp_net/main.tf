@@ -2,10 +2,13 @@ terraform {
   required_version = ">= 0.12"
 }
 
-provider "aws" {}
+provider "aws" {
+  version = "~> 3.0"
+}
 
 provider "aws" {
   alias  = "us-east-1"
+  version = "~> 3.0"
 }
 
 module "lambda" {
